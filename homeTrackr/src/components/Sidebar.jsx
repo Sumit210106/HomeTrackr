@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   FaHome,
   FaMoneyBill,
@@ -12,13 +13,14 @@ import logo from "../assets/logo.png";
 
 function Sidebar() {
   const [open, setOpen] = useState(true);
+  const location = useLocation();
 
   const Menus = [
-    { title: "Dashboard", icon: <FaHome /> },
-    { title: "Expenses", icon: <FaMoneyBill /> },
-    { title: "Pantry", icon: <FaShoppingBasket /> },
-    { title: "Bills", icon: <FaFileInvoice /> },
-    { title: "Tasks", icon: <FaTasks /> },
+    { title: "Dashboard", icon: <FaHome />, path: "/dashboard" },
+    { title: "Expenses", icon: <FaMoneyBill />, path: "/expenses" },
+    { title: "Pantry", icon: <FaShoppingBasket />, path: "/pantry" },
+    { title: "Bills", icon: <FaFileInvoice />, path: "/bills" },
+    { title: "Tasks", icon: <FaTasks />, path: "/tasks" },
   ];
 
   return (
@@ -55,18 +57,24 @@ function Sidebar() {
         {/* Menu items */}
         <ul className="space-y-3">
           {Menus.map((menu, index) => (
-            <li
-              key={index}
-              className={`flex items-center gap-x-4 p-3 rounded-lg cursor-pointer bg-clip-text text-transparent bg-gradient-to-r from-[#8b5cf6] to-[#a78bfa] hover:bg-[#1F1F23] hover:text-white hover:shadow-lg transition-all ${
-                index === 0 &&
-                "bg-[#1F1F23] shadow-lg text-white"
-              }`}
-            >
-              <span className="text-lg text-white">{menu.icon}</span>
-              <span className={`${!open && "hidden"} origin-left duration-200`}>
-                {menu.title}
-              </span>
-            </li>
+            <Link to={menu.path} key={index}>
+              <li
+                className={`flex items-center gap-x-4 p-3 rounded-lg cursor-pointer hover:bg-[#1F1F23] hover:text-white hover:shadow-lg transition-all ${
+                  location.pathname === menu.path
+                    ? "bg-[#1F1F23] shadow-lg text-white"
+                    : "bg-clip-text text-transparent bg-gradient-to-r from-[#8b5cf6] to-[#a78bfa]"
+                }`}
+              >
+                <span className="text-lg text-white">{menu.icon}</span>
+                <span
+                  className={`${
+                    !open && "hidden"
+                  } origin-left duration-200`}
+                >
+                  {menu.title}
+                </span>
+              </li>
+            </Link>
           ))}
         </ul>
       </div>
