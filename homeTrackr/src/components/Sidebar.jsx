@@ -24,11 +24,11 @@ function Sidebar() {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex ">
       <div
         className={`${
           open ? "w-72" : "w-20"
-        } bg-[#0E0E10] h-screen p-5 pt-8 relative duration-300 shadow-2xl`}
+        } bg-[#0E0E10] h-max-screen p-5 pt-8 relative duration-300 shadow-2xl`}
       >
         {/* Toggle button */}
         <div

@@ -5,7 +5,7 @@ import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <Router>
-      <div className="flex">
+      <div className="flex bg-purple-200 " >
         {/* Sidebar always visible */}
         <Sidebar />
         {/* Main page content */}
