@@ -50,7 +50,7 @@ function BillsInsight() {
                 {
                     notificationsData.map((item) => {
                         return (
-                            <li className="text-red-500">{item}</li>
+                            <li key={item} className="text-red-500">{item}</li>
                         )
                     })
                 }

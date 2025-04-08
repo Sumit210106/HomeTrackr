@@ -47,24 +47,34 @@ function ExpenseInsights() {
         'rgba(255, 181, 112, 0.5)'  // Very light orange, transparent
       ],
       borderColor: [
-       '#CC204E', // Dark red
-  '#0074B7', // Dark blue
-  '#CC9A00', // Dark yellow
-  '#009999', // Dark teal
-  '#6633CC', // Dark violet
-  '#CC7000'  // Dark orange
+        '#CC204E', // Dark red
+        '#0074B7', // Dark blue
+        '#CC9A00', // Dark yellow
+        '#009999', // Dark teal
+        '#6633CC', // Dark violet
+        '#CC7000'  // Dark orange
       ],
     }]
   };
 
   const optionsDoughnut = {
-    plugins: {datalabels: 
-      {color: '#fff',font: {weight: 'bold',size: 14},
+    plugins: {
+      datalabels: {
+        color: '#fff',
+        font: {
+          weight: 'bold',
+          size: 14
+        },
         formatter: (value) => {
           return value;
         }
       },
-      legend: {position: 'bottom',labels: {color: 'white'}}
+      legend: {
+        position: 'bottom',
+        labels: {
+          color: 'white'
+        }
+      }
     }
   };
 
@@ -82,18 +92,31 @@ function ExpenseInsights() {
   const optionsLine = {
     responsive: true,
     plugins: {
-      legend: {position: 'top'},
-      title: {display: true,
+      legend: {
+        position: 'top'
+      },
+      title: {
+        display: true,
         // text: 'Monthly Spending'
       },
     },
     scales: {
-      x: {title: {display: true,text: 'Months'}},
-      y: {title: {display: true,text: 'Spending'}}
+      x: {
+        title: {
+          display: true,
+          text: 'Months'
+        }
+      },
+      y: {
+        title: {
+          display: true,
+          text: 'Spending'
+        }
+      }
     }
   };
 
-// temp data abhi ke liye 
+  // temp data abhi ke liye 
   const notificationData = ['notification1','notification2'];
 
   return (
@@ -121,17 +144,17 @@ function ExpenseInsights() {
         {/* notification wala div */}
         <div className="text-white border border-white/40 rounded-lg flex p-3">
           <div >
-          <div className="flex items-center space-x-2 mb-2">
-            <IoIosNotifications />
-            <h1 className="text-white">Notifications</h1>
-          </div>
+            <div className="flex items-center space-x-2 mb-2">
+              <IoIosNotifications />
+              <h1 className="text-white">Notifications</h1>
+            </div>
             
             <div className="border border-white/40 rounded-lg p-2">
               <ul>
                 {
                   notificationData.map((item) => {
                     return (
-                      <li>{item}</li>
+                      <li key={item}>{item}</li>
                     )
                   })
                 }
