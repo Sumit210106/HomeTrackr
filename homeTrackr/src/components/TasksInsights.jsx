@@ -25,14 +25,14 @@ function TasksInsights() {
 
   return (
     // main outer wala div 
-    <div className='border border-white/40 rounded-xl sm:w-full h-125 mt-20 p-2 md:w-1/2 bg-gray-300'>
+    <div className='border border-white/40 rounded-xl sm:w-full h-125 mt-20 p-2 md:w-[500px] bg-gray-300'>
       <h1 className="text-black p-6 text-3xl ">Tasks Insights</h1>
       
       {/* main wrapper div-- flex ke liye */}
       <div className="flex flex-col justify-center items-center md:flex-col ">
 
         {/* progress bar wala div */}
-        <div className="text-black md:w-150 sm:w-100 h-30 p-4 ">
+        <div className="text-black  sm:w-100 h-30 p-4 ">
           <Box sx={{ width: "100%" }}>
             <LinearProgress
               variant="determinate"
@@ -53,7 +53,7 @@ function TasksInsights() {
         </div>
 
         {/* pending task wala div */}
-        <div className="text-black bg-gray-100 border border-white/40 rounded-xl md:w-150 sm:w-100 h-65 overflow-hidden p-2 ">
+        <div className="text-black bg-gray-100 border border-white/40 rounded-xl md:w-[450px] sm:w-100 h-65 overflow-hidden p-2 ">
           {/* task icon and title */}
           <div className="flex items-center space-x-2 mb-2 p-4">
             <FaTasks />

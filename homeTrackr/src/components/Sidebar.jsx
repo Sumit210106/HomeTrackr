@@ -22,7 +22,7 @@ function Sidebar() {
 
   return (
     <div className="m-5 mt-8"> 
-      <div className="w-64 h-[880px] bg-[#d6cfed] shadow-xl rounded-3xl flex flex-col justify-between p-6 ">
+      <div className="w-64 md:h-[800px] bg-[#d6cfed] shadow-xl rounded-3xl flex flex-col justify-between p-6 ">
         {/* Top section */}
         <div>
           {/* Logo */}

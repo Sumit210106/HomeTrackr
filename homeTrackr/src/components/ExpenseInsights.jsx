@@ -90,54 +90,52 @@ function ExpenseInsights() {
   };
 
   const optionsLine = {
-    responsive: true,
     plugins: {
       legend: {
-        position: 'top'
-      },
-      title: {
-        display: true,
-        // text: 'Monthly Spending'
+        labels: {
+          color: 'black', // or any color you want
+        },
       },
     },
     scales: {
       x: {
-        title: {
-          display: true,
-          text: 'Months'
-        }
+        ticks: {
+          color: 'black', // x-axis labels
+        },
       },
       y: {
-        title: {
-          display: true,
-          text: 'Spending'
-        }
-      }
-    }
+        ticks: {
+          color: 'black', // y-axis labels
+        },
+      },
+    },
   };
+  
 
   // temp data abhi ke liye 
   const notificationsData = ['notification1','notification2'];
 
   return (
-    <div className='px-4 flex justify-center md:justify-start'>
+    <div className=' flex justify-center md:justify-start'>
      
       {/* main outer div */}
-      <div className="bg-gray-300 shadow-xl flex flex-col h-auto w-full md:w-220 border border-gray-100/80 rounded-2xl mt-8 mb-5 p-6">
+      <div className="bg-gray-300 shadow-xl flex flex-col h-auto w-full md:w-[750px] border border-gray-100/80 rounded-2xl mt-8 mb-5 p-6">
         <h1 className='text-black text-3xl mb-6 p-2'>Expense Insights</h1>
         
         {/* chart wale div */}
-        <div className="flex flex-col md:flex-row gap-6 gap-y-4 mb-6 items-center md:items-stretch">
+        <div className="flex flex-col md:flex-row gap-4 gap-y-2 mb-6 items-center md:items-stretch">
           
           {/* Doughnut chart wala div */}
-          <div className="bg-gray-100 text-black rounded-xl border border-white/40 w-72 md:w-1/2 h-100 flex flex-col items-center justify-center overflow-hidden">
+          <div className="bg-gray-100 text-black rounded-xl border border-white/40 w-72 md:w-[500px] h-90 flex flex-col items-center justify-center overflow-hidden">
           {/* <h1>Category wise Expense</h1> */}
             <Doughnut data={dataDoughnut} options = {optionsDoughnut} />
           </div>
           
           {/* line chart wala div */}
-          <div className="bg-gray-100 text-white rounded-xl border border-white/40 w-72 md:w-[600px] h-100 flex flex-col items-center justify-center p-2">
+          <div className="bg-gray-100 text-white rounded-xl border border-white/40 w-72 md:w-[500px] h-90 flex flex-col items-center justify-center ">
+            <div className=" h-80 w-80 flex justify-center items-center">
             <Line data = {dataLine} options={optionsLine}/>
+            </div>
           </div>
         </div>
         
@@ -149,7 +147,7 @@ function ExpenseInsights() {
                                       <h1  className="text-black">Notifications</h1>
                             </div>
                             
-                            <div className=" bg-gray-300 border border-white/40 rounded-lg md:w-[790px] p-4 ml-2 mb-2">
+                            <div className=" bg-gray-300 border border-white/40 rounded-lg md:w-[650px] p-4 ml-2 mb-2">
                               <ul>
                                 {
                                   notificationsData.map((item) => {
