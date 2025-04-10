@@ -29,23 +29,24 @@ function BillsInsight() {
     const notificationsData = ['notification1','notification2'];
 
   return (
-    <div className="px-4 flex justify-center md:justify-start w-90">
+    <div className="px-4 flex justify-center md:justify-start md:w-50 w-[550px]">
       {/* Main outer div */}
-      <div className="bg-black shadow-xl flex flex-col h-auto w-full md:w-220 border border-gray-100/80 rounded-lg mt-8 mb-5 p-6">
-        <h1 className="text-white text-2xl mb-6">Bills Insights</h1>
+      <div className="bg-gray-300 shadow-xl flex flex-col h-auto w-full md:w-200 border border-gray-100/80 rounded-lg mt-8 mb-5 p-8">
+        <h1 className="text-black text-3xl mb-6">Bills Insights</h1>
 
         {/* Chart container */}
-        <div className="flex flex-col md:flex-row gap-6 gap-y-4 mb-6 items-center md:items-stretch mt-7">
+        <div className="flex flex-col sm:flex-col md:flex-row gap-4 sm:gap-4 md:gap-6 items-center sm:items-center md:items-stretch mt-7 bg-gray-100 p-4 sm:p-4 md:p-8 rounded-xl md:h-90 sm:h-auto w-full">
+
         <Pie data={dataPie} />
         </div>
         {/* Notification container */}
-        <div className="text-white border border-white/40 rounded-lg flex p-3 mt-18">
+        <div className="text-black bg-gray-100 border border-white/40 rounded-lg flex p-3 mt-30">
           <div>
             <div className="flex items-center space-x-2 mb-2">
                         <IoIosNotifications color="red"/>
                         <h1 className="text-red-500">Upcoming Bills</h1>
             </div>
-            <div className="border border-white/40 rounded-lg p-2">
+            <div className="bg-gray-300 border border-white/40 rounded-lg p-2 md:w-[320px]">
               <ul>
                 {
                     notificationsData.map((item) => {

@@ -7,11 +7,10 @@ import { FaSquareCheck, FaRegSquare } from 'react-icons/fa6';
 function TasksInsights() {
   // original task list
   const [tasks, setTasks] = useState([
-    { name: "Pack Lunch", status: false },
-    { name: "Car Servicing", status: true },
+    { name: "Pack Lunch", dueDate: new Date(2025, 3, 25), status: false },
+    { name: "Car Servicing", dueDate: new Date(2025, 3, 25), status: true },
   ]);
-
-
+  
   const completedTasks = tasks.filter(task => task.status).length;
   const totalTasks = tasks.length;
   const percentage = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
@@ -26,14 +25,14 @@ function TasksInsights() {
 
   return (
     // main outer wala div 
-    <div className='border border-white/40 rounded-lg w-full h-120 mt-20'>
-      <h1 className="text-white p-6 text-2xl">Tasks Insights</h1>
+    <div className='border border-white/40 rounded-xl sm:w-full h-125 mt-20 p-2 md:w-1/2 bg-gray-300'>
+      <h1 className="text-black p-6 text-3xl ">Tasks Insights</h1>
       
       {/* main wrapper div-- flex ke liye */}
-      <div className="flex flex-col justify-center items-center md:flex-col">
+      <div className="flex flex-col justify-center items-center md:flex-col ">
 
         {/* progress bar wala div */}
-        <div className="text-white w-150 h-30 p-4">
+        <div className="text-black md:w-150 sm:w-100 h-30 p-4 ">
           <Box sx={{ width: "100%" }}>
             <LinearProgress
               variant="determinate"
@@ -47,38 +46,46 @@ function TasksInsights() {
                 },
               }}
             />
-            <p className="text-white text-center mt-2">
+            <p className="text-black text-center mt-2">
               {percentage}% Task Completed
             </p>
           </Box>
         </div>
 
         {/* pending task wala div */}
-        <div className="text-white border border-white/40 rounded-lg w-160 h-65 overflow-hidden ">
+        <div className="text-black bg-gray-100 border border-white/40 rounded-xl md:w-150 sm:w-100 h-65 overflow-hidden p-2 ">
           {/* task icon and title */}
           <div className="flex items-center space-x-2 mb-2 p-4">
             <FaTasks />
-            <h1 className="text-white">Pending Tasks</h1>
+            <h1 className="text-black">Pending Tasks</h1>
           </div>
-
+              <div className="bg-gray-300 rounded-xl h-[160px] p-4 ml-2 mr-2">
           {/* task list */}
-          <ul>
+          <ul >
             {tasks.map((task, index) => (
               <li
-                key={index}
-                className="flex items-center space-x-2 mb-2 p-4 text-white cursor-pointer"
-                onClick={() => toggleTaskStatus(index)}
-              >
-                <span className="flex-1">{task.name}</span>
+              key={index}
+              className="flex items-center p-2 text-black cursor-pointer"
+              onClick={() => toggleTaskStatus(index)}
+            >
+              {/* Task name */}
+              <span className="w-1/3">{task.name}</span>
+            
+              {/* Due Date in center */}
+              <span className="w-1/3 text-center">{task.dueDate.toLocaleDateString()}</span>
+            
+              {/* Status Icon */}
+              <span className="w-1/3 flex justify-end">
                 {task.status ? (
                   <FaSquareCheck color="green" />
                 ) : (
                   <FaRegSquare color="gray" />
                 )}
-              </li>
+              </span>
+            </li>
             ))}
           </ul>
-
+          </div>
         </div>
       </div>
     </div>

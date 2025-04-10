@@ -60,10 +60,10 @@ function ExpenseInsights() {
   const optionsDoughnut = {
     plugins: {
       datalabels: {
-        color: '#fff',
+        color: 'black',
         font: {
           weight: 'bold',
-          size: 14
+          size: 12
         },
         formatter: (value) => {
           return value;
@@ -72,7 +72,7 @@ function ExpenseInsights() {
       legend: {
         position: 'bottom',
         labels: {
-          color: 'white'
+          color: 'black'
         }
       }
     }
@@ -117,51 +117,51 @@ function ExpenseInsights() {
   };
 
   // temp data abhi ke liye 
-  const notificationData = ['notification1','notification2'];
+  const notificationsData = ['notification1','notification2'];
 
   return (
     <div className='px-4 flex justify-center md:justify-start'>
      
       {/* main outer div */}
-      <div className="bg-blaxk shadow-xl flex flex-col h-auto w-full md:w-220 border border-gray-100/80 rounded-lg mt-8 mb-5 p-6">
-        <h1 className='text-white text-2xl mb-6'>Expense Insights</h1>
+      <div className="bg-gray-300 shadow-xl flex flex-col h-auto w-full md:w-220 border border-gray-100/80 rounded-2xl mt-8 mb-5 p-6">
+        <h1 className='text-black text-3xl mb-6 p-2'>Expense Insights</h1>
         
         {/* chart wale div */}
         <div className="flex flex-col md:flex-row gap-6 gap-y-4 mb-6 items-center md:items-stretch">
           
           {/* Doughnut chart wala div */}
-          <div className="bg-slate-800 text-white rounded-lg border border-white/40 w-72 md:w-1/2 h-100 flex flex-col items-center justify-center overflow-hidden">
+          <div className="bg-gray-100 text-black rounded-xl border border-white/40 w-72 md:w-1/2 h-100 flex flex-col items-center justify-center overflow-hidden">
           {/* <h1>Category wise Expense</h1> */}
             <Doughnut data={dataDoughnut} options = {optionsDoughnut} />
           </div>
           
           {/* line chart wala div */}
-          <div className="bg-slate-800 text-white rounded-lg border border-white/40 w-72 md:w-[600px] h-100 flex flex-col items-center justify-center">
+          <div className="bg-gray-100 text-white rounded-xl border border-white/40 w-72 md:w-[600px] h-100 flex flex-col items-center justify-center p-2">
             <Line data = {dataLine} options={optionsLine}/>
           </div>
         </div>
         
         {/* notification wala div */}
-        <div className="text-white border border-white/40 rounded-lg flex p-3">
-          <div >
-            <div className="flex items-center space-x-2 mb-2">
-              <IoIosNotifications />
-              <h1 className="text-white">Notifications</h1>
-            </div>
-            
-            <div className="border border-white/40 rounded-lg p-2">
-              <ul>
-                {
-                  notificationData.map((item) => {
-                    return (
-                      <li key={item}>{item}</li>
-                    )
-                  })
-                }
-              </ul>
-            </div>
-          </div>
-        </div>
+                        <div className="bg-gray-100 text-white border border-white/40 rounded-lg flex p-3">
+                          <div >
+                          <div className="flex items-center space-x-2 mb-2 ml-2">
+                                      <IoIosNotifications color="black"/>
+                                      <h1  className="text-black">Notifications</h1>
+                            </div>
+                            
+                            <div className=" bg-gray-300 border border-white/40 rounded-lg md:w-[790px] p-4 ml-2 mb-2">
+                              <ul>
+                                {
+                                  notificationsData.map((item) => {
+                                    return (
+                                      <li className="text-black" key={item}>{item}</li>
+                                    )
+                                  })
+                                }
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
       </div>
     </div>
   );

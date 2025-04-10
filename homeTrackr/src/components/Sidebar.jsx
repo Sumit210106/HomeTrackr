@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaHome,
@@ -6,13 +6,10 @@ import {
   FaShoppingBasket,
   FaFileInvoice,
   FaTasks,
-  FaChevronLeft,
-  FaChevronRight,
 } from "react-icons/fa";
 import logo from "../assets/logo.png";
 
 function Sidebar() {
-  const [open, setOpen] = useState(true);
   const location = useLocation();
 
   const Menus = [
@@ -24,59 +21,34 @@ function Sidebar() {
   ];
 
   return (
-    <div className="flex ">
-      <div
-        className={`${
-          open ? "w-72" : "w-20"
-        } bg-[#0E0E10] h-max-screen p-5 pt-8 relative duration-300 shadow-2xl`}
-      >
-        {/* Toggle button */}
-        <div
-          className="absolute -right-4 top-10 w-9 h-9 bg-[#1F1F23] text-white rounded-full shadow-lg flex items-center justify-center cursor-pointer transition-transform hover:scale-110"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <FaChevronLeft /> : <FaChevronRight />}
-        </div>
+    <div className="m-5 mt-8"> 
+      <div className="w-64 h-[880px] bg-[#d6cfed] shadow-xl rounded-3xl flex flex-col justify-between p-6 ">
+        {/* Top section */}
+        <div>
+          {/* Logo */}
+          <div className="flex items-center gap-3 mb-12 flex-col">
+            <img src={logo} alt="logo" className="w-20 h-20 rounded-full shadow-md bg-white mt-4" />
+            <span className=" mt-3 text-2xl font-bold text-gray-700">HomeTrackr</span>
+          </div>
 
-        {/* Logo Section */}
-        <div className="flex items-center gap-x-4 mb-10">
-          <img
-            src={logo}
-            className={`cursor-pointer duration-500 w-12 rounded-full shadow-xl ${
-              open && "rotate-[360deg]"
-            }`}
-            alt="logo"
-          />
-          {open && (
-            <h1 className="font-bold text-2xl tracking-wide bg-clip-text text-transparent bg-gradient-to-r from-[#8b5cf6] to-[#a78bfa]">
-              HomeTrackr
-            </h1>
-          )}
-        </div>
-
-        {/* Menu items */}
-        <ul className="space-y-3">
-          {Menus.map((menu, index) => (
-            <Link to={menu.path} key={index}>
-              <li
-                className={`flex items-center gap-x-4 p-3 rounded-lg cursor-pointer hover:bg-[#1F1F23] hover:text-white hover:shadow-lg transition-all ${
-                  location.pathname === menu.path
-                    ? "bg-[#1F1F23] shadow-lg text-white"
-                    : "bg-clip-text text-transparent bg-gradient-to-r from-[#8b5cf6] to-[#a78bfa]"
-                }`}
-              >
-                <span className="text-lg text-white">{menu.icon}</span>
-                <span
-                  className={`${
-                    !open && "hidden"
-                  } origin-left duration-200`}
+          {/* Menu Items */}
+          <nav className="space-y-4">
+            {Menus.map((menu, index) => (
+              <Link to={menu.path} key={index}>
+                <div
+                  className={`flex items-center gap-3 p-3 mt-3 rounded-xl transition-all cursor-pointer ${
+                    location.pathname === menu.path
+                      ? "bg-[#eef0fc] text-[#4c6ef5] font-medium shadow-sm"
+                      : "text-gray-600 hover:bg-[#eef0fc] hover:text-[#4c6ef5]"
+                  }`}
                 >
-                  {menu.title}
-                </span>
-              </li>
-            </Link>
-          ))}
-        </ul>
+                  <span className="text-lg">{menu.icon}</span>
+                  <span className="text-md">{menu.title}</span>
+                </div>
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </div>
   );
