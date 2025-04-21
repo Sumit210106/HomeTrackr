@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import Expenses from "./pages/Expenses";
+import Pantry from "./pages/Pantry";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/expenses" element={<Expenses />} />
+            <Route path="/pantry" element={<Pantry />} />
           </Routes>
         </div>
       </div>

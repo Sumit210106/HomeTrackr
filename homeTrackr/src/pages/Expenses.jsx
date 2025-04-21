@@ -1,7 +1,16 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { BarChart, Bar, ResponsiveContainer } from 'recharts';
+import { CiCirclePlus } from "react-icons/ci";
+
 
 export default function Expense() {
+  
+  const [hid,setHid] = useState(true)
+
+  const addExpense = () => {
+    setHid(false)
+  }
+
   const requests = [
     {
       id: 1,
@@ -108,16 +117,34 @@ export default function Expense() {
     "Postponed": "bg-gray-100 text-gray-600"
   };
 
+
+    // dialog box for add task
+    if (!hid){
+      return (
+        <div className="">
+          helloo
+        </div>
+      )
+    }
+
+
+
   return (
     <div className="bg-gray-200 p-3 sm:p-6 min-h-screen rounded-xl mx-2 my-2 sm:m-6">
       <div className="max-w-6xl mx-auto">
         {/* Main container */}
         <div className="bg-gray-100x rounded-lg shadow-sm overflow-hidden">
-          {/* Header with search */}
+          {/* Header */}
           <div className="p-4 flex items-center justify-between border-b">
-            <div className="flex items-center">
+            <div className="flex items-center ">
               <h2 className="text-xl font-bold">EXPENSE</h2>
             </div>
+            <button onClick={addExpense} className='bg-blue-200 p-2 w-40 border-1 border-black/40 rounded-lg'>
+             <div className="flex space-x-2 items-center justify-evenly">
+             <CiCirclePlus size='24px'/>
+             ADD NEW
+             </div>
+             </button>
           </div>
 
           {/* Main content */}
