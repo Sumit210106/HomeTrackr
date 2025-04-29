@@ -1,66 +1,32 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { BarChart, Bar, ResponsiveContainer } from 'recharts';
 import { CiCirclePlus } from "react-icons/ci";
 
-
 export default function Expense() {
-  
-  const [hid,setHid] = useState(true)
-
-  const addExpense = () => {
-    setHid(false)
-  }
-
-  const requests = [
+  const initialRequests = [
     {
       id: 1,
       subject: "Grocery Shopping",
       category: "Groceries",
-      users: ["avatar1", "avatar2"],
       status: "Approved",
       price: "120",
-      date: "Apr 14, 2025",
-
+      date: "Apr 14, 2025"
     },
     {
       id: 2,
       subject: "Electricity Bill",
       category: "Utilities",
-      users: ["avatar3"],
       status: "Pending",
       price: "85",
-      date: "Apr 10, 2025",
-
-    },
-    {
-      id: 2,
-      subject: "Electricity Bill",
-      category: "Utilities",
-      users: ["avatar3"],
-      status: "Pending",
-      price: "85",
-      date: "Apr 10, 2025",
-
-    },
-    {
-      id: 2,
-      subject: "Electricity Bill",
-      category: "Utilities",
-      users: ["avatar3"],
-      status: "Pending",
-      price: "85",
-      date: "Apr 10, 2025",
-
+      date: "Apr 10, 2025"
     },
     {
       id: 3,
       subject: "Movie Night",
       category: "Entertainment",
-      users: ["avatar4", "avatar5"],
       status: "Approved",
       price: "45",
-      date: "Apr 08, 2025",
-
+      date: "Apr 08, 2025"
     },
     {
       id: 4,
@@ -69,39 +35,43 @@ export default function Expense() {
       users: ["avatar6"],
       status: "Postponed",
       price: "199",
-      date: "Apr 05, 2025",
-
+      date: "Apr 05, 2025"
     },
     {
       id: 5,
       subject: "Water Filter Repair",
       category: "Maintenance",
-      users: ["avatar7"],
       status: "Approved",
       price: "60",
-      date: "Apr 02, 2025",
-
+      date: "Apr 02, 2025"
     },
     {
       id: 6,
       subject: "Birthday Cake",
       category: "Celebration",
-      users: ["avatar8", "avatar9"],
       status: "Approved",
       price: "40",
-      date: "Apr 01, 2025",
-
+      date: "Apr 01, 2025"
     }
   ];
 
-  // Sample data for the chart
+
+  const [showDialog, setShowDialog] = useState(false);
+
+  const [expenseRequests, setExpenseRequests] = useState(initialRequests);
+
+  const [newTask, setNewTask] = useState({
+    subject: "",
+    category: "",
+    price: ""
+  });
+
+
   const chartData = [
     { name: 'Sept', value: 150 },
     { name: 'Oct', value: 200 },
     { name: 'Nov', value: 270 }
   ];
-
-  // Category breakdown data
   const categories = [
     { name: "Education", count: 78, percentage: "33%" },
     { name: "Groceries", count: 64, percentage: "26%" },
@@ -109,62 +79,127 @@ export default function Expense() {
     { name: "Utilities", count: 30, percentage: "12%" },
     { name: "Other", count: 22, percentage: "10%" }
   ];
-
-  // Status colors
   const statusColors = {
     "Approved": "bg-green-100 text-green-600",
     "Pending": "bg-yellow-100 text-yellow-600",
     "Postponed": "bg-gray-100 text-gray-600"
   };
 
+  const addExpense = () => {
+    setShowDialog(true);
+  };
 
-    // dialog box for add task
-    if (!hid){
-      return (
-        <div className="">
-          helloo
-        </div>
-      )
-    }
+  const handleChange = (e) => {
+    setNewTask({
+      ...newTask,
+      [e.target.name]: e.target.value
+    });
+  };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newId = expenseRequests.length ? Math.max(...expenseRequests.map(r => r.id)) + 1 : 1;
+    const newExpense = {
+      id: newId,
+      subject: newTask.subject,
+      category: newTask.category,
+      users: [], 
+      status: "Pending",
+      price: newTask.price,
+      date: new Date().toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' })
+    };
 
+    setExpenseRequests([newExpense, ...expenseRequests]);
+    setNewTask({ subject: "", category: "", price: "" });
+    setShowDialog(false);
+  };
 
   return (
-    <div className="bg-gray-200 p-3 sm:p-6 min-h-screen rounded-xl mx-2 my-2 sm:m-6">
+    <div className="bg-gray-200 p-3 sm:p-6 min-h-screen rounded-xl mx-2 my-2 sm:m-6 relative">
+      {showDialog && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-80">
+            <h2 className="text-xl mb-4">Add New Expense</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label className="block text-gray-700 text-sm font-bold mb-1">Subject</label>
+                <input 
+                  type="text" 
+                  name="subject" 
+                  value={newTask.subject} 
+                  onChange={handleChange} 
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" 
+                  required 
+                />
+              </div>
+              <div className="mb-3">
+                <label className="block text-gray-700 text-sm font-bold mb-1">Category</label>
+                <input 
+                  type="text" 
+                  name="category" 
+                  value={newTask.category} 
+                  onChange={handleChange} 
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" 
+                  required 
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-1">Price</label>
+                <input 
+                  type="number" 
+                  name="price" 
+                  value={newTask.price} 
+                  onChange={handleChange} 
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700" 
+                  required 
+                />
+              </div>
+              <div className="flex justify-end space-x-3">
+                <button type="button" onClick={() => setShowDialog(false)} className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                  Cancel
+                </button>
+                <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                  Add
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-6xl mx-auto">
         {/* Main container */}
-        <div className="bg-gray-100x rounded-lg shadow-sm overflow-hidden">
+        <div className="bg-gray-100 rounded-lg shadow-sm overflow-hidden">
           {/* Header */}
           <div className="p-4 flex items-center justify-between border-b">
             <div className="flex items-center ">
               <h2 className="text-xl font-bold">EXPENSE</h2>
             </div>
-            <button onClick={addExpense} className='bg-blue-200 p-2 w-40 border-1 border-black/40 rounded-lg'>
-             <div className="flex space-x-2 items-center justify-evenly">
-             <CiCirclePlus size='24px'/>
-             ADD NEW
-             </div>
-             </button>
+            <button onClick={addExpense} className='bg-blue-200 p-2 w-40 border border-black/40 rounded-lg'>
+              <div className="flex space-x-2 items-center justify-evenly">
+                <CiCirclePlus size='24px'/>
+                ADD NEW
+              </div>
+            </button>
           </div>
 
           {/* Main content */}
           <div className="flex flex-col lg:flex-row">
             {/* Left: Request list */}
             <div className="w-full lg:w-2/3 border-b lg:border-b-0 lg:border-r">
-              {/* Table headers - hidden on small screens */}
+
               <div className="hidden lg:grid grid-cols-12 text-md text-gray-500 font-medium p-4 border-b">
                 <div className="col-span-3">Item & Category</div>
-                <div className="col-span-2">Family Members</div>
                 <div className="col-span-2">Status</div>
                 <div className="col-span-2">Amount</div>
                 <div className="col-span-2">Date</div>
                 <div className="col-span-1"></div>
               </div>
 
-              {/* Request rows */}
-              {requests.map((request) => (
+
+              {expenseRequests.map((request) => (
                 <div key={request.id} className="border-b hover:bg-gray-50">
-                  {/* Desktop view */}
+
                   <div className="hidden lg:grid grid-cols-12 text-sm p-4 items-center">
                     <div className="col-span-3">
                       <div className="flex items-center gap-3">
@@ -183,13 +218,6 @@ export default function Expense() {
                       </div>
                     </div>
                     <div className="col-span-2">
-                      <div className="flex -space-x-2">
-                        {request.users.map((user, idx) => (
-                          <div key={idx} className="w-6 h-6 rounded-full bg-gray-300 border border-white"></div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="col-span-2">
                       <span className={`px-3 py-1 rounded-full text-xs ${statusColors[request.status]}`}>
                         {request.status}
                       </span>
@@ -197,7 +225,6 @@ export default function Expense() {
                     <div className="col-span-2 font-medium">{request.price}</div>
                     <div className="col-span-2 text-gray-500">
                       <div>{request.date}</div>
-
                     </div>
                     <div className="col-span-1 text-right">
                       <button className="text-gray-400 hover:text-gray-600">
@@ -210,7 +237,7 @@ export default function Expense() {
                     </div>
                   </div>
 
-                  {/* Mobile/tablet view - card style layout */}
+
                   <div className="lg:hidden p-4">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex items-center gap-3">
@@ -241,21 +268,13 @@ export default function Expense() {
                         <div className="text-gray-500 mb-1">Date</div>
                         <div>{request.date}</div>
                       </div>
-                      <div>
-                        <div className="text-gray-500 mb-1">Users</div>
-                        <div className="flex -space-x-2">
-                          {request.users.map((user, idx) => (
-                            <div key={idx} className="w-6 h-6 rounded-full bg-gray-300 border border-white"></div>
-                          ))}
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Right: Summary */}
+
             <div className="w-full lg:w-1/3 p-4 md:p-6">
               <div className="mb-6 md:mb-8">
                 <h3 className="text-xs uppercase text-gray-500 font-medium mb-2">Short summary</h3>
@@ -271,7 +290,7 @@ export default function Expense() {
                   </button>
                 </div>
 
-                {/* Progress bar */}
+
                 <div className="mt-2 h-1 w-full bg-gray-200 rounded-full overflow-hidden">
                   <div className="flex h-full">
                     <div className="bg-green-400" style={{ width: '80%' }}></div>
@@ -293,7 +312,7 @@ export default function Expense() {
                 </ul>
               </div>
 
-              {/* Bar chart */}
+
               <div className="w-full h-32">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData}>

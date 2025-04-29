@@ -3,6 +3,8 @@ import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
 import Expenses from "./pages/Expenses";
 import Pantry from "./pages/Pantry";
+import Bills from "./pages/Bills";
+import Tasks from "./pages/Tasks";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/expenses" element={<Expenses />} />
             <Route path="/pantry" element={<Pantry />} />
+            <Route path="/bills" element={<Bills />} />
+            <Route path="/tasks" element={<Tasks />} />
           </Routes>
         </div>
       </div>
