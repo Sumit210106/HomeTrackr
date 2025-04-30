@@ -77,12 +77,12 @@ export default function Tasks() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 p-6 font-inter">
+        <div className="min-h-screen bg-gray-200 p-6">
             <div className="max-w-7xl mx-auto">
                 {/* Progress Section */}
                 <div className="bg-white rounded-2xl shadow-sm p-6 mb-8">
                     <div className="max-w-2xl mx-auto">
-                        <h2 className="text-2xl font-handlee text-gray-800 mb-4">My Progress</h2>
+                        <h2 className="text-xl font-semibold text-gray-800 mb-4">Task Progress</h2>
                         <Box sx={{ width: "100%" }}>
                             <LinearProgress
                                 variant="determinate"
@@ -96,7 +96,7 @@ export default function Tasks() {
                                     },
                                 }}
                             />
-                            <p className="text-sm font-handlee text-gray-600 text-center mt-2">
+                            <p className="text-sm font-medium text-gray-600 text-center mt-2">
                                 {completedTasks} of {totalTasks} tasks completed
                             </p>
                         </Box>
@@ -108,15 +108,15 @@ export default function Tasks() {
                     {/* Task List */}
                     <div className="lg:col-span-3 bg-white rounded-2xl shadow-sm p-6">
                         <div className="flex items-center justify-between mb-6">
-                            <h1 className="text-3xl font-handlee text-gray-800">
-                                My Tasks
+                            <h1 className="text-2xl font-bold text-gray-800">
+                                Task Management
                             </h1>
                             <button
                                 onClick={() => setShowDialog(true)}
-                                className="flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow font-inter"
+                                className="flex items-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow"
                             >
                                 <CiCirclePlus size="20px" className="mr-2" />
-                                <span>Add Task</span>
+                                <span>New Task</span>
                             </button>
                         </div>
 
@@ -124,7 +124,7 @@ export default function Tasks() {
                             {tasks.map((task) => (
                                 <div
                                     key={task.id}
-                                    className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:shadow-md transition-all duration-200 border border-gray-100"
+                                    className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:shadow-md transition-all duration-200"
                                 >
                                     <div className="flex items-center space-x-4">
                                         <button
@@ -138,21 +138,21 @@ export default function Tasks() {
                                             )}
                                         </button>
                                         <div>
-                                            <h3 className={`font-handlee text-lg ${task.status ? 'text-gray-400 line-through' : 'text-gray-800'}`}>
+                                            <h3 className={`font-medium ${task.status ? 'text-gray-400 line-through' : 'text-gray-800'}`}>
                                                 {task.name}
                                             </h3>
-                                            <p className="text-sm text-gray-500 font-inter">{task.description}</p>
+                                            <p className="text-sm text-gray-500">{task.description}</p>
                                         </div>
                                     </div>
                                     <div className="flex items-center space-x-4">
-                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)} font-inter`}>
+                                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}>
                                             {task.priority}
                                         </span>
-                                        <span className="flex items-center text-sm text-gray-500 font-inter">
+                                        <span className="flex items-center text-sm text-gray-500">
                                             <FaRegClock className="mr-2" />
                                             {new Date(task.dueDate).toLocaleDateString()}
                                         </span>
-                                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-600 font-inter">
+                                        <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-600">
                                             {task.category}
                                         </span>
                                     </div>
@@ -164,8 +164,8 @@ export default function Tasks() {
                     {/* Right Sidebar - Task Statistics */}
                     <div className="space-y-6">
                         <div className="bg-white rounded-2xl shadow-sm p-6">
-                            <h2 className="text-xl font-handlee text-gray-800 mb-4">Overview</h2>
-                            <div className="space-y-4 font-inter">
+                            <h2 className="text-lg font-semibold text-gray-800 mb-4">Task Overview</h2>
+                            <div className="space-y-4">
                                 <div className="flex justify-between items-center">
                                     <span className="text-gray-600">Total Tasks</span>
                                     <span className="font-semibold text-gray-800">{totalTasks}</span>
@@ -184,11 +184,11 @@ export default function Tasks() {
                 </div>
             </div>
 
-            {/* Add Task Dialog - Update font styles */}
+            {/* Add Task Dialog */}
             {showDialog && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md">
-                        <h2 className="text-2xl font-handlee text-gray-800 mb-6">Add New Task</h2>
+                        <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New Task</h2>
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Task Name</label>
